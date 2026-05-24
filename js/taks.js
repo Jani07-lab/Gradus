@@ -278,3 +278,41 @@ function excluirQuest(id) {
         renderQuests(); 
     }
 }
+
+
+// Aba do perfil
+
+function salvarPerfil(event) {
+    event.preventDefault(); 
+
+    const nome = document.getElementById("perfil-nome").value;
+    const email = document.getElementById("perfil-email").value;
+
+    // Salva os dados no navegador para persistirem
+    localStorage.setItem("player_nome", nome);
+    localStorage.setItem("player_email", email);
+
+    // Tenta atualizar o texto de boas-vindas da Dashboard (se houver a tag correspondente)
+    // Exemplo: se o seu "Olá, Estudante!" puder ser mapeado, ou você tiver uma classe/id nele.
+    
+    // Dispara o aviso de sucesso (usando o sistema de feedback que você já tem)
+    if (typeof mostrarNotificacao === "function") {
+        mostrarNotificacao("✨ Perfil Salvo", "Seu nome e e-mail foram atualizados!");
+    } else {
+        alert("Alterações salvas com sucesso!");
+    }
+}
+
+// encerrar sessão
+function encerrarSessao() {
+    
+    if (confirm("Deseja realmente sair do painel e encerrar a sessão?")) {
+        
+        // Limpa os dados do usuário 
+        localStorage.removeItem("player_nome");
+        localStorage.removeItem("player_email");
+
+        // Redireciona de volta para a tela de login externa
+        window.location.href = "telaLogin.html"; 
+    }
+}
